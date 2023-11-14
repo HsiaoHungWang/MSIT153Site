@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "First";
+}
+
+<h1>First</h1>
+<button id="buttonStart" class="btn btn-primary">Ajax Start</button>
+<div id="div1" class="alert alert-info"></div>
+
+@section Scripts{
+    <script>
+        //找到要控制的對象
+        const btn = document.querySelector('#buttonStart');
+        const theDiv = document.querySelector('#div1');
+        //在甚麼情況下(event)
+        btn.addEventListener('click',()=>{
+            //做甚麼事 Ajax        
+
+            //步驟一建立Ajax物件
+            const xhr = new XMLHttpRequest();
+            //步驟二對伺服器發出要求 > controller/action
+            xhr.open('GET','/api/Index');
+            xhr.send();
+
+            xhr.addEventListener('load',()=>{
+                //步驟三接收伺服器回傳的資料
+                const data = xhr.responseText;
+            //步驟四讀取資料
+            //步驟五顯示資料
+               theDiv.innerHTML = data;
+            })
+          
+
+        })
+
+
+
+     
+    </script>
+}
+
