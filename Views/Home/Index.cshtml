@@ -13,6 +13,18 @@
 <div class="text-center">
     <h1 class="display-4">Welcome To MSIT</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table id="tableEmployee" class="table table-bordered  table-hover">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年資</th>
+                <th>薪水</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+    </table>
 </div>
 
 @section Scripts{
@@ -41,6 +53,41 @@
             ]
         };
 
+        //emp = {} x emp.length  v emp.employees
+        //emp.employees = [] emp.employees[0]
+                //emp.employees[0] => {} emp.employees[0].name
+            //    for(let i=0,max=emp.employees.length;i<max;i++){
+            //        //DOM
+            //        const cell1 = document.createElement("td");  //<td></td>
+            //const txt1 = document.createTextNode(emp.employees[i].name) //Tom
+            //cell1.appendChild(txt1);  //<td>Tom</td>
+            //const cell2 = document.createElement("td");  //<td></td>
+            //const txt2 = document.createTextNode(emp.employees[i].workYears) //Tom
+            //cell2.appendChild(txt2);  //<td>Tom</td>
+            //const cell3 = document.createElement("td");  //<td></td>
+            //const txt3 = document.createTextNode(emp.employees[i].salary) //Tom
+            //cell3.appendChild(txt3);  //<td>Tom</td>
+            //const row = document.createElement("tr");
+            //row.appendChild(cell1);
+            //row.appendChild(cell2);
+            //row.appendChild(cell3);
+
+            //document.querySelector('#tableEmployee>tbody').appendChild(row);
+            //    }
+
+      const datas =   emp.employees.map(employee=>{
+            const {name, workYears, salary} = employee;
+            return(
+                `
+                <tr>
+                        <td>${name}</td>
+                        <td>${workYears}</td>
+                        <td>${salary}</td>
+               </tr>
+                `
+            )          
+        })    
+        document.querySelector('#tableEmployee>tbody').innerHTML = datas.join("");
     </script>
 }
 
