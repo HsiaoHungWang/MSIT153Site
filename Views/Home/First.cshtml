@@ -19,7 +19,7 @@
             //步驟一建立Ajax物件
             const xhr = new XMLHttpRequest();
             //步驟二對伺服器發出要求 > controller/action
-            xhr.open('GET','/api/Index');
+            xhr.open('GET','/api/Index?name=Jack');
             xhr.send();
 
             xhr.addEventListener('load',()=>{
