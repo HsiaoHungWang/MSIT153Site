@@ -8,7 +8,9 @@
 <div id="div1" class="alert alert-info"></div>
 
 @section Scripts{
+    <script src="~/datas/travel.js"></script>
     <script>
+        console.log(spots);
         //找到要控制的對象
         const btn = document.querySelector('#buttonStart');
         const theDiv = document.querySelector('#div1');
@@ -19,7 +21,7 @@
             //步驟一建立Ajax物件
             const xhr = new XMLHttpRequest();
             //步驟二對伺服器發出要求 > controller/action
-            xhr.open('GET','/api/Index?name=Jack');
+            xhr.open('GET','/api/Index?name=Jack&age=30');
             xhr.send();
 
             xhr.addEventListener('load',()=>{
