@@ -54,17 +54,17 @@
                 const data = xhr.responseText;
                 //步驟四讀取資料
                 //步驟五顯示資料
-                theDiv.innerHTML += data  + '< br />';
+                theDiv.innerHTML += data  + "<br  />";
             })
 
             //timeout時間到會觸發此事件
             xhr.addEventListener('timeout',()=>{
-                theDiv.innerHTML +=  '伺服器忙碌中，請稍後再來< br />';
+                theDiv.innerHTML +=  "伺服器忙碌中，請稍後再來<br  />";
             })
 
             //abort方法被呼叫會觸發此事件
             xhr.addEventListener('abort', () => {
-                theDiv.innerHTML += '您停止了程式的執行< br />';
+                theDiv.innerHTML += "您停止了程式的執行<br  />";
             })
 
 
