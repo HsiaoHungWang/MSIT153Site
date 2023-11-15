@@ -23,7 +23,7 @@ namespace MSIT153Site.Controllers
             return Content($"Hello {user.name}， You are {user.age} years old.");
         }
 
-        public IActionResult register(MemberViewModel member, IFormFile formFile)
+        public IActionResult Register(MemberViewModel member, IFormFile formFile)
         {
             //實際路徑
             //C:\Users\User\Documents\workspace\MSIT153Site\wwwroot\uploads\abc.jpg
