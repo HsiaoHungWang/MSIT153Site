@@ -31,6 +31,9 @@
     <script>
         const btn = document.querySelector('#buttonSubmit');
         const divMessage = document.querySelector('#div1');
+        const name = document.querySelector('#inputName');
+        const email = document.querySelector('#inputEmail');
+        const age = document.querySelector('#inputAge');
         btn.addEventListener('click',event=>{
            event.preventDefault();
 
@@ -45,7 +48,8 @@
             //發出要求
             xhr.open('POST','@Url.Content("~/api/register")');
             xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-            xhr.send('name=Jack&age=30&email=Jack@company.com');
+         //   xhr.send('name=Jack&age=30&email=Jack@company.com');
+            xhr.send(`name=${name.value}&age=${age.value}&email=${email.value}`);
 
 
         })
