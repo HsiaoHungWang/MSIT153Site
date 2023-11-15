@@ -7,10 +7,11 @@ namespace MSIT153Site.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DemoContext _context;
+        public HomeController(ILogger<HomeController> logger, DemoContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -25,6 +26,11 @@ namespace MSIT153Site.Controllers
         public IActionResult Register()
         {
             return View();
+        }
+
+        public IActionResult Members()
+        {
+            return View(_context.Members);
         }
 
         public IActionResult Privacy()

@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using MSIT153Site.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//«Ø¥ßEF
+builder.Services.AddDbContext<DemoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DemoConnection")));
 
 var app = builder.Build();
 
