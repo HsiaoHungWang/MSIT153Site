@@ -28,25 +28,47 @@
        //    })
 
        //api 回傳的是文字 透過 resposne.text()接收
-        fetch('@Url.Content("~/api/index")?name=Mary&age=30')
-            .then(response => response.text())
-            .then(data => document.querySelector('#div1').innerHTML=data);
+        //fetch('@Url.Content("~/api/index")?name=Mary&age=30')
+        //    .then(response => response.text())
+        //    .then(data => document.querySelector('#div1').innerHTML=data);
+
+        async function loadText(){
+             const response = await fetch('@Url.Content("~/api/index")?name=Mary&age=30');
+            const data =  await response.text();
+            document.querySelector('#div1').innerHTML = data        
+        }
+        loadText();
 
 
         //api 回傳的是JSON 透過 resposne.json()接收,收到的是一個promise物件
-      fetch('@Url.Content("~/api/cities")')
-        .then(response=>response.json())
-        .then(datas => {
-            const cities = datas.map(city=>`<li>${city}</li>`)
+      //fetch('@Url.Content("~/api/cities")')
+      //  .then(response=>response.json())
+      //  .then(datas => {
+      //      const cities = datas.map(city=>`<li>${city}</li>`)
+      //      document.querySelector('#ul1').innerHTML = cities.join("");
+      //  });
+      async function loadJson(){
+          const response = await  fetch('@Url.Content("~/api/cities")');
+          const datas = await response.json();
+            const cities = datas.map(city => `<li>${city}</li>`)
             document.querySelector('#ul1').innerHTML = cities.join("");
-        });
+         
+      }
+      loadJson();
 
         //api 回傳的是圖透過 resposne.blob()接收,收到的是一個promise物件
-        fetch('@Url.Content("~/api/GetImageByte/6")')
-          .then(response=>response.blob())
-          .then(datas=>{
-              document.querySelector('#img1').src = URL.createObjectURL(datas);
-          })
+        //fetch('@Url.Content("~/api/GetImageByte/6")')
+        //  .then(response=>response.blob())
+        //  .then(datas=>{
+        //      document.querySelector('#img1').src = URL.createObjectURL(datas);
+        //  })
+
+        async function loadImage(){
+            const response = await fetch('@Url.Content("~/api/GetImageByte/6")');
+            const datas = await response.blob();
+            document.querySelector('#img1').src = URL.createObjectURL(datas);
+        }
+        loadImage();
     </script>
 }
 
