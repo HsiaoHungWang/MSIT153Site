@@ -4,12 +4,15 @@
 }
 
 <h1>Address</h1>
-<select id="selectCity">
-</select>
+<select id="selectCity"></select>
+<select id="selectDistrict"></select>
+<select id="selectRoad"></select>
 
 @section Scripts{
     <script>
         const selCity = document.querySelector('#selectCity');
+        const selDistrict = document.querySelector('#selectDistrict');
+        const selRoad = document.querySelector('#selectRoad');
 
         function loadCity(){
             //ajax
@@ -22,8 +25,32 @@
             xhr.open('GET', '@Url.Content("~/api/cities")');
             xhr.send()
         }
+        function loadDistrict() {
+            //ajax
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', () => {
+                const datas = JSON.parse(xhr.responseText);
+                const districts = datas.map(district => `<option value='${district}'>${district}</option>`)
+                selDistrict.innerHTML = districts.join("");
+            })
+            xhr.open('GET', '@Url.Content("~/api/districts")?city=臺北市');
+            xhr.send()
+        }
+        function loadRoad() {
+            //ajax
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', () => {
+                const datas = JSON.parse(xhr.responseText);
+                const roads = datas.map(road => `<option value='${road}'>${road}</option>`)
+                selRoad.innerHTML = roads.join("");
+            })
+            xhr.open('GET', '@Url.Content("~/api/roads")?siteId=臺北市大安區');
+            xhr.send()
+        }
 
         loadCity();
+        loadDistrict();
+        loadRoad();
     </script>
 }
 
