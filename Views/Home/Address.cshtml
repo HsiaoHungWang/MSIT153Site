@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="selectCity">
+</select>
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector('#selectCity');
+
+        function loadCity(){
+            //ajax
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load',()=>{
+                const datas = JSON.parse(xhr.responseText);
+                const cities = datas.map(city => `<option value='${city}'>${city}</option>` )
+            selCity.innerHTML = cities.join("");
+            })
+            xhr.open('GET', '@Url.Content("~/api/cities")');
+            xhr.send()
+        }
+
+        loadCity();
+    </script>
+}
+
