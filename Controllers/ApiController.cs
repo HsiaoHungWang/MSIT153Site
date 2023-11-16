@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MSIT153Site.Models;
 using MSIT153Site.Models.ViewModel;
 using System.IO;
 
@@ -7,9 +8,11 @@ namespace MSIT153Site.Controllers
     public class ApiController : Controller
     {
         private readonly IWebHostEnvironment _host;
-        public ApiController(IWebHostEnvironment host)
+        private readonly DemoContext _context;
+        public ApiController(IWebHostEnvironment host, DemoContext context)
         {
             _host = host;
+            _context = context;
         }
         //  public IActionResult Index(string name, int age=30)
         public IActionResult Index(UserViewModel user)
@@ -23,7 +26,7 @@ namespace MSIT153Site.Controllers
             return Content($"Hello {user.name}， You are {user.age} years old.");
         }
 
-        public IActionResult Register(MemberViewModel member, IFormFile formFile)
+        public IActionResult Register(Members member, IFormFile formFile)
         {
             //實際路徑
             //C:\Users\User\Documents\workspace\MSIT153Site\wwwroot\uploads\abc.jpg
@@ -37,7 +40,22 @@ namespace MSIT153Site.Controllers
             {
                 formFile.CopyTo(fileStream);
             }
-            return Content(strPath);
+
+            member.FileName = formFile.FileName;
+            //將上傳的圖轉成二進位
+            byte[]? imgByte = null;
+            using (var memoryStream = new MemoryStream())
+            {
+                formFile.CopyTo(memoryStream);
+                imgByte = memoryStream.ToArray();
+            }
+            member.FileData = imgByte;
+
+            //將資料寫進資料庫中
+            _context.Members.Add(member);
+            _context.SaveChanges();
+
+            return Content("新增成功");
             //檔案名稱、檔案大小、檔案類型
             //string fileInfo = $"{formFile?.FileName} - {formFile?.Length} - {formFile?.ContentType}";
             //return Content(fileInfo);
