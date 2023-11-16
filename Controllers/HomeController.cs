@@ -48,6 +48,11 @@ namespace MSIT153Site.Controllers
             return View();
         }
 
+        public IActionResult History()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
