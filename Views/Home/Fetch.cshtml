@@ -4,7 +4,8 @@
 }
 
 <h1>Fetch</h1>
-
+<div id="div1"></div>
+<ul id="ul1"></ul>
 @section Scripts{
     <script>
        //fetch('@Url.Content("~/api/index")?name=Mary&age=30')
@@ -25,9 +26,19 @@
        //        console.log(data);
        //    })
 
+       //api 回傳的是文字 透過 resposne.text()接收
         fetch('@Url.Content("~/api/index")?name=Mary&age=30')
             .then(response => response.text())
-            .then(data => console.log(data))
+            .then(data => document.querySelector('#div1').innerHTML=data);
+
+
+        //api 回傳的是JSON 透過 resposne.json()接收,收到的是一個promise物件
+      fetch('@Url.Content("~/api/cities")')
+        .then(response=>response.json())
+        .then(datas => {
+            const cities = datas.map(city=>`<li>${city}</li>`)
+            document.querySelector('#ul1').innerHTML = cities.join("");
+        });
     </script>
 }
 
