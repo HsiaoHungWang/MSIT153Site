@@ -7,6 +7,7 @@
 <select id="selectCity"></select>
 <select id="selectDistrict"></select>
 <select id="selectRoad"></select>
+<div id="div1"></div>
 
 @section Scripts{
     <script>
@@ -20,11 +21,13 @@
             //console.log(selCity.options[i].value);
             //console.log(selCity.options[i].text);
 
-            console.log(selCity.value);
+          //  console.log(selCity.value);
          //   console.log(selCity.text);
+            loadDistrict();
         })
         selDistrict.addEventListener('change', () => {
-            console.log(selDistrict.value);
+           // console.log(selDistrict.value);
+            loadRoad()
         })
         selRoad.addEventListener('change', () => {
             console.log(selRoad.value);
@@ -37,6 +40,7 @@
                 const datas = JSON.parse(xhr.responseText);
                 const cities = datas.map(city => `<option value='${city}'>${city}</option>` )
             selCity.innerHTML = cities.join("");
+                loadDistrict();
             })
             xhr.open('GET', '@Url.Content("~/api/cities")');
             xhr.send()
@@ -48,8 +52,9 @@
                 const datas = JSON.parse(xhr.responseText);
                 const districts = datas.map(district => `<option value='${district}'>${district}</option>`)
                 selDistrict.innerHTML = districts.join("");
+                loadRoad();
             })
-            xhr.open('GET', '@Url.Content("~/api/districts")?city=臺北市');
+            xhr.open('GET',`@Url.Content("~/api/districts")?city=${selCity.value}`);
             xhr.send()
         }
         function loadRoad() {
@@ -60,13 +65,13 @@
                 const roads = datas.map(road => `<option value='${road}'>${road}</option>`)
                 selRoad.innerHTML = roads.join("");
             })
-            xhr.open('GET', '@Url.Content("~/api/roads")?siteId=臺北市大安區');
+            xhr.open('GET', `@Url.Content("~/api/roads")?siteId=${selDistrict.value}`);
             xhr.send()
         }
 
         loadCity();
-        loadDistrict();
-        loadRoad();
+      
+  
     </script>
 }
 
