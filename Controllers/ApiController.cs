@@ -17,7 +17,7 @@ namespace MSIT153Site.Controllers
         //  public IActionResult Index(string name, int age=30)
         public IActionResult Index(UserViewModel user)
         {
-            System.Threading.Thread.Sleep(1000);
+           // System.Threading.Thread.Sleep(1000);
             if (string.IsNullOrEmpty(user.name))
             {
                 user.name = "guest";

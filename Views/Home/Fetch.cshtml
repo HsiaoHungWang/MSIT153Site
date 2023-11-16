@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Fetch";
+}
+
+<h1>Fetch</h1>
+
+@section Scripts{
+    <script>
+       //fetch('@Url.Content("~/api/index")?name=Mary&age=30')
+       //    .then(response => {
+       //        console.log(response);
+       //        console.log(response.ok);
+       //        console.log(response.status);
+       //         console.log(response.headers.get('Content-Type'));
+       //         console.log(response.headers.get('Content-Length'));
+       //         console.log(response.headers.get('Date'));
+       //         if(response.ok){
+       //           return  response.text();
+       //         }else{
+
+       //         }
+       //    })
+       //    .then(data=>{
+       //        console.log(data);
+       //    })
+
+        fetch('@Url.Content("~/api/index")?name=Mary&age=30')
+            .then(response => response.text())
+            .then(data => console.log(data))
+    </script>
+}
+
