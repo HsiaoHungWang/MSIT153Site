@@ -6,3 +6,4 @@
 - 作業二 檢查帳號是否存在
 使用者輸入姓名離開後，透過Ajax技術將姓名送到api/CheckAccount Action
 在 CheckAccount Action 中檢查帳號是否存在，將檢查結果回傳給Client端顯示
+- 作業三 將連動式的下拉式選單改用 fetch 及 async await 的語法來完成
