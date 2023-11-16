@@ -62,5 +62,19 @@ namespace MSIT153Site.Controllers
             //return Content("<h2>Ajax 你好 !!</h2>","text/html", System.Text.Encoding.UTF8);
             //return Content($"Hello {member.name}，{member.email},  You are {member.age} years old.");
         }
+   
+      public IActionResult Cities()
+        {
+            var cities = _context.Address.Select(c => c.City).Distinct();
+            return Json(cities);
+        }
+    
+        public IActionResult districts(string city)
+        {
+            var districts = _context.Address.Where(a => a.City == city).Select(a => a.SiteId).Distinct();
+            return Json(districts);
+        }
+
+
     }
 }
