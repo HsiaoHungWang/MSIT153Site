@@ -14,6 +14,22 @@
         const selDistrict = document.querySelector('#selectDistrict');
         const selRoad = document.querySelector('#selectRoad');
 
+        selCity.addEventListener('change',()=>{
+
+            //const i = selCity.selectedIndex;
+            //console.log(selCity.options[i].value);
+            //console.log(selCity.options[i].text);
+
+            console.log(selCity.value);
+         //   console.log(selCity.text);
+        })
+        selDistrict.addEventListener('change', () => {
+            console.log(selDistrict.value);
+        })
+        selRoad.addEventListener('change', () => {
+            console.log(selRoad.value);
+        })
+
         function loadCity(){
             //ajax
             const xhr = new XMLHttpRequest();
