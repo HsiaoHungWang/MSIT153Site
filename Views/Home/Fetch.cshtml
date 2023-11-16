@@ -5,6 +5,7 @@
 
 <h1>Fetch</h1>
 <div id="div1"></div>
+<img id="img1" />
 <ul id="ul1"></ul>
 @section Scripts{
     <script>
@@ -39,6 +40,13 @@
             const cities = datas.map(city=>`<li>${city}</li>`)
             document.querySelector('#ul1').innerHTML = cities.join("");
         });
+
+        //api 回傳的是圖透過 resposne.blob()接收,收到的是一個promise物件
+        fetch('@Url.Content("~/api/GetImageByte/6")')
+          .then(response=>response.blob())
+          .then(datas=>{
+              document.querySelector('#img1').src = URL.createObjectURL(datas);
+          })
     </script>
 }
 

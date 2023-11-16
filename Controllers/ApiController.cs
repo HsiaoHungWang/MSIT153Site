@@ -84,6 +84,19 @@ namespace MSIT153Site.Controllers
             return Json(roads);
         }
 
+        //讀取資料庫中二進位的圖片
+        public IActionResult GetImageByte(int id = 1)
+        {
+            Members? member = _context.Members.Find(id);
+            byte[]? img = member?.FileData;
+
+            if(img != null)
+            {
+                return File(img, "image/jpeg");
+            }
+            return NotFound();
+        }
+
 
     }
 }
