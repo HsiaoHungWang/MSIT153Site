@@ -63,16 +63,25 @@ namespace MSIT153Site.Controllers
             //return Content($"Hello {member.name}，{member.email},  You are {member.age} years old.");
         }
    
+        //讀取不會重複的城市名稱
       public IActionResult Cities()
         {
             var cities = _context.Address.Select(c => c.City).Distinct();
             return Json(cities);
         }
-    
-        public IActionResult districts(string city)
+
+        //根據城市名稱讀取不會重複的鄉鎮區名稱
+        public IActionResult Districts(string city)
         {
             var districts = _context.Address.Where(a => a.City == city).Select(a => a.SiteId).Distinct();
             return Json(districts);
+        }
+
+        //根據鄉鎮區讀取路的名稱
+        public IActionResult Roads(string siteId)
+        {
+            var roads = _context.Address.Where(a => a.SiteId == siteId).Select(a => a.Road);
+            return Json(roads);
         }
 
 
