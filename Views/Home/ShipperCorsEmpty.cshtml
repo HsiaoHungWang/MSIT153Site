@@ -7,22 +7,28 @@
 }
 <h1>ShipperCors</h1>
 <button id="buttonAdd" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
-    <i class="fas fa-plus-square"></i>
+    <i class="bi bi-person-fill-add"></i>
 </button>
 <table id="shippers" class="table table-bordered">
     <thead>
         <tr>
-            <th>ShipperID</th>
-            <th>CompanyName</th>
-            <th>Phone</th>
-            <th>Delete</th>
+            <th>編號</th>
+            <th>公司名稱</th>
+            <th>聯絡電話</th>
+            <th>編輯</th>
         </tr>
     </thead>
     <tbody>
-    <tr><td>1</td><td>Speedy Express</td><td>(503) 555-9831</td><td><button class="btn btn-secondary mr-3" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
-        </tr><tr><td>2</td><td>United Package</td><td>(503) 555-3199</td><td><button class="btn btn-secondary mr-3" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr>
-        <tr><td>3</td><td>Federal Shipping</td><td>(503) 555-9931</td><td><button class="btn btn-secondary mr-3" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr>
-        <tr><td>8</td><td>PCHOME</td><td>02-33221122</td><td><button class="btn btn-secondary mr-3" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr></tbody>
+        <tr>
+            <td>1</td>
+            <td>Speedy Express</td>
+            <td>(503) 555-9831</td>
+            <td><button class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-pencil-square"></i></button><button class="btn btn-danger m-1"><i class="bi bi-trash-fill"></i></button></td>
+        </tr>
+        <tr><td>2</td><td>United Package</td><td>(503) 555-3199</td><td><button class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-pencil-square"></i></button><button class="btn btn-danger m-1"><i class="bi bi-trash-fill"></i></button></td></tr>
+        <tr><td>3</td><td>Federal Shipping</td><td>(503) 555-9931</td><td><button class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-pencil-square"></i></button><button class="btn btn-danger m-1"><i class="bi bi-trash-fill"></i></button></td></tr>
+        <tr><td>8</td><td>PCHOME</td><td>02-33221122</td><td><button class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi bi-pencil-square"></i></button><button class="btn btn-danger m-1"><i class="bi bi-trash-fill"></i></button></td></tr>
+    </tbody>
 </table>
 
 <!-- Modal -->
@@ -52,8 +58,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                <button type="button" class="btn btn-primary" id="buttonSend">送出</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-file-x-fill"></i> 關閉</button>
+                <button type="button" class="btn btn-primary" id="buttonSend"><i class="bi bi-send-check-fill"></i> 送出 </button>
             </div>
         </div>
     </div>
