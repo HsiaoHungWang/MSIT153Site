@@ -2,21 +2,34 @@
 @{
     ViewData["Title"] = "ShipperCors";
 }
-
+@section Styles{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+}
 <h1>ShipperCors</h1>
-<button id="buttonAdd" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addModal">
-    <i class="fas fa-plus-square"></i>
+<button id="buttonAdd" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+    <i class="bi bi-person-fill-add"></i> 
 </button>
 <table id="shippers" class="table table-bordered">
     <thead>
         <tr>
-            <th>ShipperID</th>
-            <th>CompanyName</th>
-            <th>Phone</th>
-            <th>Delete</th>
+            <th>編號</th>
+            <th>公司名稱</th>
+            <th>聯絡電話</th>
+            <th>編輯</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+@*        <tr>
+            <td>1</td>
+            <td>Speedy Express</td>
+            <td>(503) 555-9831</td>
+            <td>
+                <button class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <i class="bi bi-pencil-square"></i></button>
+               <button class="btn btn-danger m-1"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+        </tr>*@
+     
 </table>
 
 <!-- Modal -->
@@ -26,9 +39,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Shipper <span></span></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          @*      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </button>*@
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addForm">
@@ -45,55 +59,54 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                <button type="button" class="btn btn-primary" id="buttonSend">送出</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-file-x-fill"></i> 關閉</button>
+                <button type="button" class="btn btn-primary" id="buttonSend"><i class="bi bi-send-check-fill"></i> 送出 </button>
             </div>
         </div>
     </div>
 </div>
 @section Scripts{ 
 <script>
-    const url = "https://localhost:44311/api/Shippers"
-    load()
+    const url = "https://localhost:7282/api/Shippers/"; 
 
     //讀取資料
     function load() {
-        const tbShipper = $('#shippers>tbody')
-        $.getJSON(url, function (datas) {
-            const docFrag = $(document.createDocumentFragment())
-            $.each(datas, function (index, shipper) {
-                const cell1 = $('<td></td>').text(shipper.shipperId);
-                const cell2 = $('<td></td>').text(shipper.companyName);
-                const cell3 = $('<td></td>').text(shipper.phone);
-                const cell4 = $('<td></td>').html('<button class="btn btn-secondary mr-3" data-toggle="modal" data-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>')
+            const tbShipper = $('#shippers>tbody')
+            $.getJSON(url, function (datas) {
+                const docFrag = $(document.createDocumentFragment())
+                $.each(datas, function (index, shipper) {
+                    const cell1 = $('<td></td>').text(shipper.shipperId);
+                    const cell2 = $('<td></td>').text(shipper.companyName);
+                    const cell3 = $('<td></td>').text(shipper.phone);
+                    const cell4 = $('<td></td>').html('<button class="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#addModal">  <i class="bi bi-pencil-square"></i></button><button class="btn btn-danger m-1"><i class="bi bi-trash-fill"></i></button>')
 
-                const row = $('<tr></tr>').append([cell1, cell2, cell3, cell4])
-                docFrag.append(row)
+                    const row = $('<tr></tr>').append([cell1, cell2, cell3, cell4])
+                    docFrag.append(row)
+                })
+                tbShipper.html(docFrag)
             })
-            tbShipper.html(docFrag)
-        })
     }
+        load();
 
     $('#buttonSend').click(function () {
         //隱藏欄位中有shipperID 的資料我們就是要做修改
-        const id = $('#ShipperID').val()
-        if (id) {
-            //資料修改
-            const jsonData = JSON.stringify({ShipperID:id, CompanyName: $('#CompanyName').val(), Phone: $('#Phone').val() })
-            // console.log(jsonData)
-            $.ajax({
-                url: url + "/" + id,
-                type: 'PUT',
-                contentType: 'application/json',
-                data: jsonData
-            }).done(function (data) {
-                alert("修改成功，編號為 " + id)
-                load()
-                clearData()
-            })
-
-        } else {
-            //資料新增
+            const id = $('#ShipperID').val()
+            if (id) {
+  //資料修改
+                const jsonData = JSON.stringify({ ShipperID: id, CompanyName: $('#CompanyName').val(), Phone: $('#Phone').val() })
+                // console.log(jsonData)
+                $.ajax({
+                    url: `${url}${id}`,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: jsonData
+                }).done(function (data) {
+                    alert("修改成功，編號為 " + id)
+                    load()
+                    clearData()
+                })
+            }else{
+ //資料新增
             const jsonData = JSON.stringify({ CompanyName: $('#CompanyName').val(), Phone: $('#Phone').val() })
             // console.log(jsonData)
             $.ajax({
@@ -103,44 +116,40 @@
                 data: jsonData
             }).done(function (data) {
                 alert("新增成功，編號為 " + data.shipperId)
-                load()
-                clearData()
+                    load()
+                    clearData()
             })
 
-        }
+            }
 
-
-      
-        $('#addModal').modal('hide')
+           
+            $('#addModal').modal('hide')
     })
 
     //編輯
     //先將要修改的資料寫到Modal中
     $('#shippers>tbody').on('click', 'button:nth-child(1)', function () {
-       // alert('編輯')
-        const shipperId = $(this).parents('tr').find('td:nth-child(1)').text()
-        const companyName = $(this).parents('tr').find('td:nth-child(2)').text()
-        const phone = $(this).parents('tr').find('td:nth-child(3)').text()
+            const shipperId = $(this).parents('tr').find('td:nth-child(1)').text()
+            const companyName = $(this).parents('tr').find('td:nth-child(2)').text()
+            const phone = $(this).parents('tr').find('td:nth-child(3)').text()
 
-        $('#ShipperID').val(shipperId)
-        $('#CompanyName').val(companyName)
-        $('#Phone').val(phone)
-
-
+            $('#ShipperID').val(shipperId)
+            $('#CompanyName').val(companyName)
+            $('#Phone').val(phone)
     })
 
     //刪除
     $('#shippers>tbody').on('click', 'button:nth-child(2)', function () {
-        //https://localhost:44311/api/Shippers/7
-        const id = $(this).parents('tr').find('td:first-child').text()
+          
+            const id = $(this).parents('tr').find('td:first-child').text()
 
-        $.ajax({
-            url: url + "/" +  id,
-            type:'DELETE'
-        }).done(function (data) {
-            alert("刪除成功，編號為 " + id)
-            load()
-        })
+            $.ajax({
+                url: `${url}${id}` ,
+                type: 'DELETE'
+            }).done(function (data) {
+                alert("刪除成功，編號為 " + id)
+                load()
+            })
     })
 
 

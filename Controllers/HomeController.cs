@@ -57,7 +57,7 @@ namespace MSIT153Site.Controllers
         {
             return View();
         }
-        public IActionResult ShipperCorsEmpty()
+        public IActionResult ShipperCors()
         {
             return View();
         }
