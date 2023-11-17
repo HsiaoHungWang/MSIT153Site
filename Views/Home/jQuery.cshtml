@@ -16,12 +16,20 @@
 @section Scripts{
     <script>
         $('#buttonGet').click(function () {
-            $('#divAlert').text("GET")
+            $.get('@Url.Content("~/api/Index")',{"name":"Jack","age":28},(data)=>{
+                    $('#divAlert').text(data);
+            })
+          
         })
         $('#buttonPost').click(function () {
-            $('#divAlert').text("POST")
+            $.post('@Url.Content("~/api/Index")', { "name": "Mary", "age": 30 }, (data) => {
+                $('#divAlert').text(data);
+            })
         })
         $('#buttonJson').click(function () {
+            $.getJSON('@Url.Content("~/api/cities")',(datas)=>{
+                console.log(datas);
+            })
             $('#divAlert').text("JSON")
         })
         $('#buttonLoad').click(function () {
