@@ -41,9 +41,9 @@
             })
             $('#divAlert').text("JSON")
         })
-        $('#buttonLoad').click(function () {
-            $('#divAlert').text("LOAD")
-        })
+        //$('#buttonLoad').click(function () {
+            $('#divAlert').load('@Url.Content("~/home/partial2")');
+      //  })
         $('#buttonAjax').click(function () {
             $('#divAlert').text("AJAX")
         })

@@ -67,6 +67,18 @@ namespace MSIT153Site.Controllers
             return View();
         }
 
+        public IActionResult Partial1()
+        {
+            return PartialView();
+        }
+        public IActionResult Partial2()
+        {
+            ViewBag.message = "資料來自 Partial2 Action";
+           
+            return PartialView();
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
