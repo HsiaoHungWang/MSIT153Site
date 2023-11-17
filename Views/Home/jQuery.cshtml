@@ -13,6 +13,8 @@
 <div class="alert alert-dark mt-3 w-50" role="alert" id="divAlert">
 
 </div>
+<ul class="list-group">
+</ul>
 @section Scripts{
     <script>
         $('#buttonGet').click(function () {
@@ -28,7 +30,14 @@
         })
         $('#buttonJson').click(function () {
             $.getJSON('@Url.Content("~/api/cities")',(datas)=>{
-                console.log(datas);
+                const docFrag = $(document.createDocumentFragment());
+                $.each(datas,(index,city)=>{
+                    //console.log(city);
+                   // <li class="list-group-item" > An item < /li>
+                   const li =   $('<li></li>').text(city).addClass('list-group-item');
+                    docFrag.append(li);
+                })
+                $('.list-group').html(docFrag);
             })
             $('#divAlert').text("JSON")
         })
